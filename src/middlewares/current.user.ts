@@ -21,7 +21,7 @@ export const currentUserMiddleware = (
   next: NextFunction
 ) => {
   if (!req.session?.jwt) {
-    throw throwError(401, "Not Authorized");
+    return next();
   }
 
   try {
