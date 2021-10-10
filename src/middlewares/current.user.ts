@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { throwError } from "..";
 
 interface UserPayload {
   id: string;
@@ -20,7 +21,7 @@ export const currentUserMiddleware = (
   next: NextFunction
 ) => {
   if (!req.session?.jwt) {
-    return next();
+    throw throwError(401, "Not Authorized");
   }
 
   try {
